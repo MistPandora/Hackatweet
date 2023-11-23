@@ -16,7 +16,7 @@ function Home() {
     const [userName, setUserName] = useState(user.username);
     const [message, setMessage] = useState('');
     const tweets = useSelector((state) => state.tweets.value);
-
+    const [messageLength, setMessageLength] = useState(0)
 
     const currentDate = Date.parse(new Date());
 
@@ -33,6 +33,13 @@ function Home() {
         dispatch(logoutUser());
     };
 
+    const sendTweet = () => {
+        dispatch(addTweetToStore({ firstname: firstName, username: userName, message, date: currentDate }))
+
+    }
+
+
+
     const tweetElements = tweets.map((e, i) => <Tweet {...e} currentDate={currentDate} />)
 
 
@@ -46,12 +53,17 @@ function Home() {
                     <p>connection of user: {firstName.length}</p>
                 </div>
                 <button className={styles.logOutButton} id="disconnection" onClick={() => handleLogout()}>Logout</button>
-                <div className={styles.writeTweet}>
-                    <input className={styles.input} type="text" placeholder="What's up?" id="newTweet" onChange={(e) => setMessage(e.target.value)} value={message} /> </div>
+
             </div>
 
             <div className={styles.centerContainer}>
+                <div className={styles.writeTweet}>
+                    <input className={styles.input} type="text" placeholder="What's up?" id="newTweet" onChange={(e) => { setMessage(e.target.value); setMessageLength(e.target.value.length) }} value={message} maxLength={280} /> </div>
+                <div className={styles.writerMessage}>
+                    <p>{messageLength}/280</p>
+                    <button className={styles.tweetButton} id="tweet" onClick={() => sendTweet()}>Tweet</button>
 
+                </div>
             </div>
 
             <div className={styles.rightContainer}>
