@@ -53,8 +53,10 @@ function Home() {
                     <div className={styles.userConnection}>
                         <Image className={styles.profileImg} src="/eggProfile.jpg" alt="img" width={80} height={80} />
 
-                        <p className={styles.firstname}>{firstName}</p>
-                        <p className={styles.username}>@{userName}</p>
+                        <div className={styles.profileNames}><p className={styles.firstname}>{firstName}</p>
+                            <p className={styles.username}>@{userName}</p>
+                        </div>
+
                     </div>
                     <button className={styles.logOutButton} id="disconnection" onClick={() => handleLogout()}>Logout</button>
 
