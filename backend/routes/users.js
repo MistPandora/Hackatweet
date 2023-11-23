@@ -48,4 +48,11 @@ router.post('/signin', (req, res) => {
     });
 });
 
+router.get('/connected/:username', (req, res) => {
+    const username = req.params.username;
+    User.findOne({ username }).then(user => {
+        user ? res.json({ result: true, user }) : res.json({ result: false, error: "User not found" })
+    })
+});
+
 module.exports = router;

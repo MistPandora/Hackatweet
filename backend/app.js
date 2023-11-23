@@ -1,5 +1,5 @@
 require('dotenv').config();
-require('../models/connection');
+require('./models/connection');
 
 var express = require('express');
 var path = require('path');
@@ -21,6 +21,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', indexRouter);
+app.use('/users', usersRouter);
 
 module.exports = app;

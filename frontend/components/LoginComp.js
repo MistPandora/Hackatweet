@@ -33,7 +33,10 @@ function LoginComp() {
       body: JSON.stringify({ firstname, username, password }),
     }).then(response => response.json())
       .then(data => {
-        data.result && dispatch(login({ username, token: data.token }));
+        if (data.result) {
+          dispatch(login({ username, token: data.token }));
+          window.location.href = "/home"
+        }
       });
   };
 
@@ -63,9 +66,6 @@ function LoginComp() {
       right: 0,
       bottom: 0,
       backgroundColor: 'rgba(0,0,0,0.4)',
-    },
-    modal: {
-
     },
     content: {
       top: '50%',
