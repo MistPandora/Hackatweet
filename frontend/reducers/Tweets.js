@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-    value: { token: null, username: null },
+    value: [],
 };
 
 export const tweetSlice = createSlice({
@@ -9,10 +9,14 @@ export const tweetSlice = createSlice({
     initialState,
     reducers: {
         addTweetToStore: (state, action) => {
+            state.value.push(action.payload)
+        },
+        removeTweetToStore: (state, action) => {
+            state.value = []
 
         }
     },
 });
 
-export const { addTweetToStore } = tweetSlice.actions;
+export const { addTweetToStore, removeTweetToStore } = tweetSlice.actions;
 export default tweetSlice.reducer;
