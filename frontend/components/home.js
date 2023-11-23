@@ -49,20 +49,27 @@ function Home() {
                 <div className={styles.logoContainer}>
                     <Image className={styles.logo} src="/logoTwitter.png" alt="Logo" width={80} height={80} />
                 </div>
-                <div className={styles.userConnection}>
-                    <p>connection of user: {firstName.length}</p>
+                <div className={styles.profileAndButtonContainer}>
+                    <div className={styles.userConnection}>
+                        <Image className={styles.profileImg} src="/eggProfile.jpg" alt="img" width={80} height={80} />
+
+                        <p className={styles.firstname}>{firstName}</p>
+                        <p className={styles.username}>@{userName}</p>
+                    </div>
+                    <button className={styles.logOutButton} id="disconnection" onClick={() => handleLogout()}>Logout</button>
+
                 </div>
-                <button className={styles.logOutButton} id="disconnection" onClick={() => handleLogout()}>Logout</button>
 
             </div>
 
             <div className={styles.centerContainer}>
                 <div className={styles.writeTweet}>
-                    <input className={styles.input} type="text" placeholder="What's up?" id="newTweet" onChange={(e) => { setMessage(e.target.value); setMessageLength(e.target.value.length) }} value={message} maxLength={280} /> </div>
-                <div className={styles.writerMessage}>
-                    <p>{messageLength}/280</p>
-                    <button className={styles.tweetButton} id="tweet" onClick={() => sendTweet()}>Tweet</button>
+                    <input className={styles.input} type="text" placeholder="What's up?" id="newTweet" onChange={(e) => { setMessage(e.target.value); setMessageLength(e.target.value.length) }} value={message} maxLength={280} />
 
+                    <div className={styles.bottomMessage}>
+                        <p className={styles.letterCounter}>{messageLength}/280</p>
+                        <button className={styles.tweetButton} id="tweet" onClick={() => sendTweet()}>Tweet</button>
+                    </div>
                 </div>
             </div>
 

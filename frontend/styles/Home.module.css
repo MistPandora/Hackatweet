@@ -1,0 +1,62 @@
+.homeBody {
+    display: flex;
+    width: 100vw;
+    min-height: 100vh;
+    color: #fff;
+}
+
+.leftContainer {
+    min-width: 400px;
+    width: 25%;
+    padding: 25px;
+}
+
+.centerContainer {
+    min-width: 700px;
+    width: 45%;
+    border-left: 1px solid #878787;
+    border-right: 1px solid #878787;
+}
+
+.rightContainer {
+    min-width: 350px;
+    width: 25%
+}
+
+.input {
+    height: 40px;
+    width: 250px;
+    border: none;
+    border-bottom: 1px solid #878787;
+    outline: none;
+    color: #fff;
+    padding: 0 15px;
+    font-size: 16px;
+    background-color: #151d27;
+}
+
+.signButton {
+    height: 45px;
+    width: 250px;
+    border: none;
+    background-color: #fff;
+    color: #151d27;
+    cursor: pointer;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.signButton.blue {
+    background-color: #2d78c6;
+    color: #fff;
+}
+
+.logo {
+    transform: rotate(0.5turn);
+}
+
+.username {
+    color: #878787
+}
