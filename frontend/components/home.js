@@ -2,8 +2,8 @@ import styles from '../styles/Home.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import logout from '../reducers/user'
-import { addTweetToStore, removeTweetToStore } from '../reducers/Tweets';
+import { logoutUser } from '../reducers/user'
+import { addTweetToStore, removeTweetToStore } from '../reducers/tweets';
 import Tweet from './Tweet'
 
 function Home() {
@@ -27,7 +27,7 @@ function Home() {
     }, [])
 
     const handleLogout = () => {
-        dispatch(logout());
+        dispatch(logoutUser());
     };
 
 

@@ -1,15 +1,15 @@
-import styles from '../styles/LoginComp.module.css';
+import styles from '../styles/Login.module.css';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import SignUp from './signup';
-import SignIn from './signin';
+import SignUp from './Signup';
+import SignIn from './Signin';
 import Modal from 'react-modal';
 import Image from 'next/Image'
-import { login } from '../reducers/user'
+import { loginUser } from '../reducers/user'
 
 Modal.setAppElement('body');
 
-function LoginComp() {
+function Login() {
 
   const dispatch = useDispatch();
 
@@ -34,7 +34,7 @@ function LoginComp() {
     }).then(response => response.json())
       .then(data => {
         if (data.result) {
-          dispatch(login({ username, token: data.token }));
+          dispatch(loginUser({ username, token: data.token }));
           window.location.href = "/home"
         }
       });
@@ -50,7 +50,7 @@ function LoginComp() {
     }).then(response => response.json())
       .then(data => {
         if (data.result) {
-          dispatch(login({ username, token: data.token }));
+          dispatch(loginUser({ username, token: data.token }));
           window.location.href = "/home"
         }
 
@@ -125,4 +125,4 @@ function LoginComp() {
   );
 }
 
-export default LoginComp;
+export default Login;

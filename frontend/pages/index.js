@@ -1,7 +1,7 @@
-import LoginComp from '../components/LoginComp';
+import Login from '../components/Login';
 
 function LoginPage() {
-  return <LoginComp />;
+  return <Login />;
 }
 
 export default LoginPage;

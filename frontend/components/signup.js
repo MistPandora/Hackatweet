@@ -1,4 +1,4 @@
-import styles from '../styles/LoginComp.module.css';
+import styles from '../styles/Login.module.css';
 import Image from 'next/Image'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
