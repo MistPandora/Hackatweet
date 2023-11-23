@@ -24,7 +24,7 @@ function signup(props) {
     return (
         <div className={styles.container}>
             <div className={styles.xMarkContainer}>
-                <FontAwesomeIcon icon={faXmark} className={styles.xMark} />
+                <FontAwesomeIcon icon={faXmark} className={styles.xMark} onClick={() => props.closeModal()} />
             </div>
             <div className={styles.logoContainer}>
                 <Image className={styles.logo} src="/logoTwitter.png" alt="Logo" width={80} height={80} />
@@ -38,15 +38,6 @@ function signup(props) {
                 <input className={styles.input} type="password" placeholder="Password" id="signUpPassword" onChange={(e) => setSignUpPassword(e.target.value)} value={signUpPassword} />
                 <button className={styles.signButton} id="connection" onClick={() => handleClick()}>Sign Up</button>
             </div>
-
-
-
-
-
-
-
-
-
         </div>
     );
 
