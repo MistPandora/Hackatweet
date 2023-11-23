@@ -1,5 +1,6 @@
 import styles from '../styles/Home.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPoo } from '@fortawesome/react-fontawesome';
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { logoutUser } from '../reducers/user'
@@ -38,7 +39,9 @@ function Home() {
 
     }
 
-
+    const deleteTweet = () => {
+        dispatch(removeTweetToStore({ firstname: firstName, username: userName, message }))
+    }
 
     const tweetElements = tweets.map((e, i) => <Tweet {...e} currentDate={currentDate} />)
 
@@ -51,7 +54,7 @@ function Home() {
                 </div>
                 <div className={styles.profileAndButtonContainer}>
                     <div className={styles.userConnection}>
-                        <Image className={styles.profileImg} src="/eggProfile.jpg" alt="img" width={80} height={80} />
+                        <Image className={styles.profileImg} src="/eggProfile.jpg" alt="img" width={55} height={55} />
 
                         <div className={styles.profileNames}><p className={styles.firstname}>{firstName}</p>
                             <p className={styles.username}>@{userName}</p>
@@ -71,6 +74,12 @@ function Home() {
                     <div className={styles.bottomMessage}>
                         <p className={styles.letterCounter}>{messageLength}/280</p>
                         <button className={styles.tweetButton} id="tweet" onClick={() => sendTweet()}>Tweet</button>
+                    </div>
+                    <div className={styles.tweetContainer}>
+                        {tweetElements}
+
+                        <FontAwesomeIcon icon={faPoo} className={styles.Poo} onClick={() => deleteTweet()} />
+
                     </div>
                 </div>
             </div>
