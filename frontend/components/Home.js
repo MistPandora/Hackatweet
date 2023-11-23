@@ -1,6 +1,7 @@
 import styles from '../styles/Home.module.css';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import SignUp from './signup';
 
 function Home() {
   const dispatch = useDispatch();
@@ -42,27 +43,18 @@ function Home() {
 
 
 
-  const activitiesComponents = activities.map((data, i) => {
-    return <Activity key={i} name={data.name} timer={data.timer} />;
-  });
+
 
   return (
     <div className={styles.container}>
-      <div className={styles.topSection}>
-        <div className={styles.trackerWindow}>
-          <div className={styles.trackerHeader}>
-            Time tracker
-          </div>
-          <div className={styles.addSection}>
-            <input type="text" placeholder="Activity name" id="activityName" />
-            <button id="add">Add activity</button>
-          </div>
-        </div>
-      </div>
 
-      <div className={styles.bottomSection}>
-        {activitiesComponents}
-      </div>
+      <Popover title="Sign Up" content={<SignUp />} className={styles.popover} trigger="click">
+        <Button>Sign Up</Button>
+      </Popover>
+
+
+
+
     </div>
   );
 }
