@@ -5,12 +5,11 @@ const initialState = {
 };
 
 export const likedTweetSlice = createSlice({
-    name: 'user',
+    name: 'likedTweets',
     initialState,
     reducers: {
         addLikedTweetToStore: (state, action) => {
-            state.value.token = action.payload.token;
-            state.value.username = action.payload.username;
+
         }
     },
 });

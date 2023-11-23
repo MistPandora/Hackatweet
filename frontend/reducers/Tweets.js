@@ -5,12 +5,11 @@ const initialState = {
 };
 
 export const tweetSlice = createSlice({
-    name: 'user',
+    name: 'tweets',
     initialState,
     reducers: {
         addTweetToStore: (state, action) => {
-            state.value.token = action.payload.token;
-            state.value.username = action.payload.username;
+
         }
     },
 });

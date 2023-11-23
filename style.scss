@@ -1,0 +1,54 @@
+$mainColor: #151d27;
+
+* {
+    background-color: $mainColor;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    row-gap: 25px;
+    align-items: center;
+    width: 500px;
+    height: 450px;
+    border-radius: 10px;
+    border: 1px solid white
+}
+
+.signTitle {
+    color: #fff;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.signSection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 15px;
+    width: 100%;
+}
+
+.input {
+    height: 40px;
+    width: 250px;
+    border: 1px solid #878787;
+    outline: none;
+    color: #fff;
+    padding: 0 15px;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+.button {
+    height: 40px;
+    width: 250px;
+    border: none;
+    background-color: #fff;
+    color: $mainColor;
+    cursor: pointer;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: bold;
+
+}

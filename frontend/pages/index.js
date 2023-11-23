@@ -1,7 +1,7 @@
-import Home from '../components/Home';
+import LoginComp from '../components/LoginComp';
 
-function Index() {
-  return <Home />;
+function LoginPage() {
+  return <LoginComp />;
 }
 
-export default Index;
+export default LoginPage;
