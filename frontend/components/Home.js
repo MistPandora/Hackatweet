@@ -2,6 +2,7 @@ import styles from '../styles/Home.module.css';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import SignUp from './signup';
+import SignIn from './signin';
 import { Popover, Button } from 'antd';
 function Home() {
   const dispatch = useDispatch();
@@ -19,10 +20,11 @@ function Home() {
 
       <Popover title="Sign Up" content={<SignUp />} className={styles.popover} trigger="click">
         <Button>Sign up</Button>
-        <Button>Sign in</Button>
       </Popover>
 
-
+      <Popover title="Sign Up" content={<SignIn />} className={styles.popover} trigger="click">
+        <Button>Sign in</Button>
+      </Popover>
 
 
     </div>

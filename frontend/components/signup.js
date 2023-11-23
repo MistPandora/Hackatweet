@@ -27,18 +27,20 @@ function signup() {
 
     return (
         <div className={styles.container}>
-            <FontAwesomeIcon icon={faXmark} />
-            <div className={styles.header}>
-                <div className={styles.logocontainer}>
-                    <Image src="../logoTwitter" alt="Logo" width={100} height={100} />
-                    <p className={styles.signTitle}>Create your Hackatweet account</p>
-                </div>
+            <div className={styles.xMarkContainer}>
+                <FontAwesomeIcon icon={faXmark} className={styles.xMark} />
             </div>
+            <div className={styles.logoContainer}>
+                <Image className={styles.logo} src="/logoTwitter.png" alt="Logo" width={80} height={80} />
+            </div>
+
+            <p className={styles.signTitle}>Create your Hackatweet account</p>
+
             <div className={styles.signSection}>
-                <input type="text" placeholder="Firstname" id="signUpUsername" onChange={(e) => (e.target.value)} />
-                <input type="text" placeholder="Username" id="signUpUsername" onChange={(e) => (e.target.value)} />
-                <input type="password" placeholder="Password" id="signUpPassword" onChange={(e) => (e.target.value)} />
-                <button id="connection" onClick={() => handleConnection()}>SignUp</button>
+                <input className={styles.input} type="text" placeholder="Firstname" id="signUpUsername" onChange={(e) => (e.target.value)} />
+                <input className={styles.input} type="text" placeholder="Username" id="signUpUsername" onChange={(e) => (e.target.value)} />
+                <input className={styles.input} type="password" placeholder="Password" id="signUpPassword" onChange={(e) => (e.target.value)} />
+                <button className={styles.signButton} id="connection" onClick={() => handleConnection()}>Sign Up</button>
             </div>
 
 
@@ -56,3 +58,5 @@ function signup() {
 
 
 }
+
+export default signup
