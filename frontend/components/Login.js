@@ -4,14 +4,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import SignUp from './Signup';
 import SignIn from './Signin';
 import Modal from 'react-modal';
-import Image from 'next/Image'
-import { loginUser } from '../reducers/user'
+import Image from 'next/Image';
+import { loginUser } from '../reducers/user';
+import { useRouter } from 'next/router';
 
 Modal.setAppElement('body');
 
 function Login() {
 
+
   const dispatch = useDispatch();
+  const router = useRouter();
+  const user = useSelector(state => state.user.value);
 
   const [modalIsOpen, setIsOpen] = useState(false);
   const [isSignIn, setIsSignIn] = useState();
@@ -35,7 +39,7 @@ function Login() {
       .then(data => {
         if (data.result) {
           dispatch(loginUser({ username, token: data.token }));
-          window.location.href = "/home"
+          router.push("/home")
         }
       });
   };
@@ -51,7 +55,7 @@ function Login() {
       .then(data => {
         if (data.result) {
           dispatch(loginUser({ username, token: data.token }));
-          window.location.href = "/home"
+          router.push("/home");
         }
 
       });
@@ -113,8 +117,9 @@ function Login() {
           overlayClassName={styles.Overlay}
           style={customStyles}
         >
-          {isSignIn ? <SignIn handleConnection={handleConnection} closeModal={closeModal} />
-            : <SignUp handleRegister={handleRegister} closeModal={closeModal} />}
+          {
+            isSignIn ? <SignIn handleConnection={handleConnection} closeModal={closeModal} />
+              : <SignUp handleRegister={handleRegister} closeModal={closeModal} />}
 
         </Modal>
 
