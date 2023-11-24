@@ -1,6 +1,4 @@
 import styles from '../styles/Home.module.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPoo } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { logoutUser } from '../reducers/user'
@@ -14,18 +12,20 @@ function Home() {
 
     const dispatch = useDispatch();
     const user = useSelector((state) => state.user.value);
-    const [firstName, setFirstName] = useState('');
-    const [userName, setUserName] = useState(user.username);
+    const [firstname, setFirstName] = useState('');
+    const [username, setUserName] = useState(user.username);
     const [message, setMessage] = useState('');
     const [isTweetAdded, setIsTweetAdded] = useState(false);
     const [messageLength, setMessageLength] = useState(0);
-
+    const [tweets, setTweets] = useState([])
     const currentDate = Date.parse(new Date());
+
+    const [countLiked, setCountLiked] = useState('')
 
     const router = useRouter();
 
     useEffect(() => {
-        fetch(`http://localhost:3000/users/connected/${userName}`)
+        fetch(`http://localhost:3000/users/connected/${username}`)
             .then(response => response.json())
             .then(data => {
                 setFirstName(data.user.firstname)
@@ -37,7 +37,7 @@ function Home() {
         fetch('http://localhost:3000/tweets/')
             .then(response => response.json())
             .then(data => {
-                setTweets(data.tweets)
+                setTweets([...tweets, data.tweets])
             })
     }, [isTweetAdded])
 
@@ -51,21 +51,24 @@ function Home() {
         fetch('http://localhost:3000/tweets/newTweet', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ firstname: firstName, username: userName, message, date: currentDate }),
+            body: JSON.stringify({ firstname, username, message, date: currentDate }),
         }).then(response => response.json())
             .then(() => {
                 setIsTweetAdded(!isTweetAdded);
             });
-
-
-
     }
 
     const deleteTweet = () => {
-        dispatch(removeTweetToStore({ firstname: firstName, username: userName, message }))
+        deleteTweet.remove([...tweets, data.tweets])
     }
 
-    const tweetElements = tweets.map((e, i) => <Tweet {...e} currentDate={currentDate} />)
+
+
+
+
+    const tweetElements = tweets.map((e, i) => {
+        <Tweet {...e} deleteTweet={deleteTweet} currentDate />
+    })
 
 
     return (
@@ -78,8 +81,8 @@ function Home() {
                     <div className={styles.userConnection}>
                         <img className={styles.profileImg} src="/eggProfile.jpg" alt="img" />
 
-                        <div className={styles.profileNames}><p className={styles.firstname}>{firstName}</p>
-                            <p className={styles.username}>@{userName}</p>
+                        <div className={styles.profileNames}><p className={styles.firstname}>{firstname}</p>
+                            <p className={styles.username}>@{username}</p>
                         </div>
 
                     </div>
@@ -102,7 +105,7 @@ function Home() {
 
                 <div className={styles.tweetContainer}>
                     {tweetElements}
-                    <FontAwesomeIcon icon={faPoo} className={styles.poo} onClick={() => deleteTweet()} />
+
                 </div>
 
             </div>
