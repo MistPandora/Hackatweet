@@ -57,6 +57,7 @@ function Home() {
         }).then(response => response.json())
             .then(() => {
                 setIsTweetAdded(!isTweetAdded);
+                setMessage('')
             });
     }
 
@@ -70,7 +71,7 @@ function Home() {
 
         const response = await fetch('http://localhost:3000/tweets/deleteTweet', config);
         const data = await response.json();
-
+        setIsTweetAdded(!isTweetAdded);
         return data
     }
 
@@ -126,6 +127,7 @@ function Home() {
 
 
     const tweetElements = tweets.map((e, i) => {
+
         return <Tweet key={i} {...e} currentDate deleteTweet={deleteTweet} updateLiked={updateLiked} />
     })
 
@@ -169,7 +171,7 @@ function Home() {
             </div>
 
             <div className={styles.rightContainer}>
-
+                <button onClick={() => { router.push('/hashtag') }}>Hashtag</button>
             </div>
 
         </div>

@@ -32,12 +32,9 @@
 }
 
 .input {
-    height: 40px;
-    padding: 0 25px !important;
     width: 85%;
     border: none;
-    border: 1px solid #333b45;
-    border-radius: 25px;
+    border-bottom: 1px solid #333b45;
     outline: none;
     color: #fff;
     padding: 0 5px;
@@ -117,7 +114,7 @@
 
 .profileNames {
     display: flex;
-    flex-direction: column;
+    align-items: center;
     justify-content: space-evenly;
     padding-bottom: 5px;
 }
@@ -125,11 +122,13 @@
 .firstname {
     font-size: 20px;
     font-weight: bold;
+    margin-bottom: 3px;
 }
 
 .username {
     color: #697481;
     font-size: 18px;
+    margin-left: 5px;
 }
 
 .tweetContainer {
@@ -150,4 +149,30 @@
 .poo:hover {
     opacity: 0.7;
     transition: opacity 0.3s ease-in-out;
+}
+
+.tweetWrapper {
+    display: flex;
+    flex-direction: column;
+    padding: 25px;
+    border-bottom: 1px solid #333b45;
+}
+
+.tweetHeader {
+    display: flex;
+}
+
+.tweetHeader.leftContainer {
+    display: flex;
+}
+
+.dateContainer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+.messageBtnContainer {
+    display: flex;
 }
