@@ -33,13 +33,13 @@ function Home() {
 
     }, [])
 
-    // useEffect(() => {
-    //     fetch('http://localhost:3000/tweets/')
-    //         .then(response => response.json())
-    //         .then(data => {
-    //             setTweets(data.tweets)
-    //         })
-    // }, [isTweetAdded])
+    useEffect(() => {
+        fetch('http://localhost:3000/tweets/')
+            .then(response => response.json())
+            .then(data => {
+                setTweets(data.tweets)
+            })
+    }, [isTweetAdded])
 
     const handleLogout = () => {
         dispatch(logoutUser());
@@ -101,7 +101,7 @@ function Home() {
                 </div>
 
                 <div className={styles.tweetContainer}>
-                    {/* {tweetElements} */}
+                    {tweetElements}
                     <FontAwesomeIcon icon={faPoo} className={styles.poo} onClick={() => deleteTweet()} />
                 </div>
 
