@@ -33,32 +33,14 @@ function Home() {
 
     }, [])
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 224aeb5004aae7d08fdf24b2df4246334022a151
     useEffect(() => {
         fetch('http://localhost:3000/tweets/')
             .then(response => response.json())
             .then(data => {
-<<<<<<< HEAD
                 setTweets([...tweets, data.tweets])
             })
     }, [isTweetAdded])
-=======
-    // useEffect(() => {
-    //     fetch('http://localhost:3000/tweets/')
-    //         .then(response => response.json())
-    //         .then(data => {
-    //             setTweets(data.tweets)
-    //         })
-    // }, [isTweetAdded])
->>>>>>> 31798e0817b5fd859c119e2a882cbbbf0acc4dcd
-=======
-                setTweets(data.tweets)
-            })
-    }, [isTweetAdded])
->>>>>>> 224aeb5004aae7d08fdf24b2df4246334022a151
+
 
     const handleLogout = () => {
         dispatch(logoutUser());
@@ -77,26 +59,16 @@ function Home() {
             });
     }
 
-<<<<<<< HEAD
+
     const deleteTweet = () => {
         deleteTweet.remove([...tweets, data.tweets])
     }
 
 
 
-
-
     const tweetElements = tweets.map((e, i) => {
         <Tweet {...e} deleteTweet={deleteTweet} currentDate />
     })
-=======
-    // const deleteTweet = () => {
-    //     dispatch(removeTweetToStore({ firstname: firstName, username: userName, message }))
-    // }
-
-    // const tweetElements = tweets.map((e, i) => <Tweet {...e} currentDate={currentDate} />)
->>>>>>> 31798e0817b5fd859c119e2a882cbbbf0acc4dcd
-
 
     return (
         <div className={styles.homeBody}>
@@ -131,17 +103,9 @@ function Home() {
                 </div>
 
                 <div className={styles.tweetContainer}>
-<<<<<<< HEAD
-<<<<<<< HEAD
+
                     {tweetElements}
 
-=======
-                    {/* {tweetElements} */}
-=======
-                    {tweetElements}
->>>>>>> 224aeb5004aae7d08fdf24b2df4246334022a151
-                    <FontAwesomeIcon icon={faPoo} className={styles.poo} onClick={() => deleteTweet()} />
->>>>>>> 31798e0817b5fd859c119e2a882cbbbf0acc4dcd
                 </div>
 
             </div>
