@@ -8,6 +8,7 @@ import Image from 'next/Image';
 import { loginUser } from '../reducers/user';
 import { useRouter } from 'next/router';
 
+
 Modal.setAppElement('body');
 
 function Login() {
@@ -96,7 +97,7 @@ function Login() {
       <div className={styles.signContainer}>
 
         <div className={styles.logoContainer}>
-          <Image className={styles.logo} src="/logoTwitter.png" alt="Logo" width={80} height={80} />
+          <Image className="logo" src="/logoTwitter.png" alt="Logo" width={80} height={80} />
         </div>
 
         <h1 className={styles.bigTitle}>See what's happening</h1>

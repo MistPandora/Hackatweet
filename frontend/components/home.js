@@ -1,12 +1,14 @@
 import styles from '../styles/Home.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPoo } from '@fortawesome/react-fontawesome';
+import { faPoo } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { logoutUser } from '../reducers/user'
 import { addTweetToStore, removeTweetToStore } from '../reducers/tweets';
 import Tweet from './Tweet';
 import Image from 'next/Image';
+import { useRouter } from 'next/router';
+
 
 
 function Home() {
@@ -17,9 +19,11 @@ function Home() {
     const [userName, setUserName] = useState(user.username);
     const [message, setMessage] = useState('');
     const tweets = useSelector((state) => state.tweets.value);
-    const [messageLength, setMessageLength] = useState(0)
+    const [messageLength, setMessageLength] = useState(0);
 
     const currentDate = Date.parse(new Date());
+
+    const router = useRouter();
 
     useEffect(() => {
         fetch(`http://localhost:3000/users/connected/${userName}`)
@@ -32,6 +36,7 @@ function Home() {
 
     const handleLogout = () => {
         dispatch(logoutUser());
+        router.push('/')
     };
 
     const sendTweet = () => {
@@ -50,11 +55,11 @@ function Home() {
         <div className={styles.homeBody}>
             <div className={styles.leftContainer}>
                 <div className={styles.logoContainer}>
-                    <Image className={styles.logo} src="/logoTwitter.png" alt="Logo" width={80} height={80} />
+                    <Image className="logo" src="/logoTwitter.png" alt="Logo" width={80} height={80} onClick={() => handleLogout()} />
                 </div>
                 <div className={styles.profileAndButtonContainer}>
                     <div className={styles.userConnection}>
-                        <Image className={styles.profileImg} src="/eggProfile.jpg" alt="img" width={55} height={55} />
+                        <img className={styles.profileImg} src="/eggProfile.jpg" alt="img" />
 
                         <div className={styles.profileNames}><p className={styles.firstname}>{firstName}</p>
                             <p className={styles.username}>@{userName}</p>
@@ -68,20 +73,21 @@ function Home() {
             </div>
 
             <div className={styles.centerContainer}>
+                <h2 className={styles.pageTitle}>Home</h2>
                 <div className={styles.writeTweet}>
-                    <input className={styles.input} type="text" placeholder="What's up?" id="newTweet" onChange={(e) => { setMessage(e.target.value); setMessageLength(e.target.value.length) }} value={message} maxLength={280} />
+                    <textarea className={styles.input} type="text" placeholder="What's up?" id="newTweet" onChange={(e) => { setMessage(e.target.value); setMessageLength(e.target.value.length) }} maxLength={280} value={message} style={{ 'resize': 'none' }} />
 
-                    <div className={styles.bottomMessage}>
+                    <div className={styles.bottomWriteTweet}>
                         <p className={styles.letterCounter}>{messageLength}/280</p>
                         <button className={styles.tweetButton} id="tweet" onClick={() => sendTweet()}>Tweet</button>
                     </div>
-                    <div className={styles.tweetContainer}>
-                        {tweetElements}
-
-                        <FontAwesomeIcon icon={faPoo} className={styles.Poo} onClick={() => deleteTweet()} />
-
-                    </div>
                 </div>
+
+                <div className={styles.tweetContainer}>
+                    {tweetElements}
+                    <FontAwesomeIcon icon={faPoo} className={styles.poo} onClick={() => deleteTweet()} />
+                </div>
+
             </div>
 
             <div className={styles.rightContainer}>

@@ -13,3 +13,8 @@ body {
   margin: 0;
   box-sizing: border-box;
 }
+
+.logo {
+  transform: rotate(0.5turn);
+  cursor: pointer;
+}
