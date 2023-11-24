@@ -4,7 +4,6 @@ import { faPoo } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { logoutUser } from '../reducers/user'
-import { addTweetToStore, removeTweetToStore } from '../reducers/tweets';
 import Tweet from './Tweet';
 import Image from 'next/Image';
 import { useRouter } from 'next/router';
@@ -18,7 +17,7 @@ function Home() {
     const [firstName, setFirstName] = useState('');
     const [userName, setUserName] = useState(user.username);
     const [message, setMessage] = useState('');
-    const tweets = useSelector((state) => state.tweets.value);
+    const [isTweetAdded, setIsTweetAdded] = useState(false);
     const [messageLength, setMessageLength] = useState(0);
 
     const currentDate = Date.parse(new Date());
@@ -34,13 +33,31 @@ function Home() {
 
     }, [])
 
+    useEffect(() => {
+        fetch('http://localhost:3000/tweets/')
+            .then(response => response.json())
+            .then(data => {
+                setTweets(data.tweets)
+            })
+    }, [isTweetAdded])
+
     const handleLogout = () => {
         dispatch(logoutUser());
         router.push('/')
     };
 
     const sendTweet = () => {
-        dispatch(addTweetToStore({ firstname: firstName, username: userName, message, date: currentDate }))
+
+        fetch('http://localhost:3000/tweets/newTweet', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ firstname: firstName, username: userName, message, date: currentDate }),
+        }).then(response => response.json())
+            .then(() => {
+                setIsTweetAdded(!isTweetAdded);
+            });
+
+
 
     }
 
