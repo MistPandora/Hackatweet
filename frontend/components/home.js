@@ -17,7 +17,7 @@ function Home() {
     const [message, setMessage] = useState('');
     const [isTweetAdded, setIsTweetAdded] = useState(false);
     const [messageLength, setMessageLength] = useState(0);
-    const [tweets, setTweets] = useState([])
+    const [tweets, setTweets] = useState([]);
     const currentDate = Date.parse(new Date());
 
     const [countLiked, setCountLiked] = useState('')
@@ -37,9 +37,10 @@ function Home() {
         fetch('http://localhost:3000/tweets/')
             .then(response => response.json())
             .then(data => {
-                setTweets([...tweets, data.tweets])
+                data.result && setTweets([...data.tweets])
             })
     }, [isTweetAdded])
+
 
 
     const handleLogout = () => {
@@ -65,16 +66,75 @@ function Home() {
     }
 
 
+    const getTweet = async (username, message) => {
+        const config = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username, message })
+        }
+
+        const response = await fetch('http://localhost:3000/tweets/getTweet', config);
+        const data = await response.json();
+
+        return data.tweet
+    }
+
+    const getUserId = async (username) => {
+        const response = await fetch(`http://localhost:3000/users/${username}/userId`);
+        const data = await response.json();
+
+        return data.user._id
+    }
+
+    const getIsLikedByUser = async (username, message) => {
+        const userId = await getUserId(username);
+        const tweet = await getTweet(username, message);
+        const tweetId = tweet._id;
+
+        const response = await fetch(`http://localhost:3000/tweets/${tweetId}/isLikedBy/${userId}`);
+        const data = await response.json();
+
+        return data.result;
+
+    }
+
+
+    const updateLiked = async (username, message) => {
+
+        const isLikedByUser = await getIsLikedByUser(username, message);
+        const tweet = await getTweet(username, message);
+        const tweetId = tweet._id;
+
+        console.log(isLikedByUser)
+
+        if (isLikedByUser) {
+            const response = await fetch(`/${tweetId}/likedBy/${username}`);
+            const data = await response.json();
+            return data
+        } else {
+            const response = await fetch(`/${tweetId}/unlikedBy/${username}`);
+            const data = await response.json();
+            return data
+        }
+
+    }
+
 
     const tweetElements = tweets.map((e, i) => {
-        <Tweet {...e} deleteTweet={deleteTweet} currentDate />
+        return <Tweet key={i} {...e} currentDate deleteTweet={deleteTweet} updateLiked={updateLiked} />
     })
+
+    console.log(firstname)
+
+    console.log(tweetElements)
+
+
 
     return (
         <div className={styles.homeBody}>
             <div className={styles.leftContainer}>
                 <div className={styles.logoContainer}>
-                    <Image className="logo" src="/logoTwitter.png" alt="Logo" width={80} height={80} onClick={() => handleLogout()} />
+                    <Image className="logo" src="/logoTwitter.png" alt="Logo" width={80} height={80} />
                 </div>
                 <div className={styles.profileAndButtonContainer}>
                     <div className={styles.userConnection}>
@@ -86,7 +146,6 @@ function Home() {
 
                     </div>
                     <button className={styles.logOutButton} id="disconnection" onClick={() => handleLogout()}>Logout</button>
-
                 </div>
 
             </div>
