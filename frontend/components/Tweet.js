@@ -13,11 +13,11 @@ function Tweet(props) {
                 <img className={styles.profileImg} src="/eggProfile.jpg" alt="img" />
                 <div className={styles.profileNames}><p className={styles.firstname}>{props.firstname}</p>
                     <p className={styles.username}>@{props.username}</p>
-                    <p>{props.currentDate - props.date}</p>
+                    {/* <p>{props.currentDate - props.date}</p> */}
                 </div>
                 <div className={styles.message}>{props.message}</div>
                 <FontAwesomeIcon icon={faHeart} className={styles.heart} onClick={() => props.updateLiked(props.username, props.message)} />
-                <FontAwesomeIcon icon={faPoo} className={styles.poo} onClick={() => props.deleteTweet()} />
+                <FontAwesomeIcon icon={faPoo} className={styles.poo} onClick={() => props.deleteTweet(props.username, props.message)} />
                 <p>count</p>
 
 

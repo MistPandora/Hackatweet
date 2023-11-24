@@ -61,8 +61,17 @@ function Home() {
     }
 
 
-    const deleteTweet = () => {
-        deleteTweet.remove([...tweets, data.tweets])
+    const deleteTweet = async (username, message) => {
+        const config = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username, message })
+        };
+
+        const response = await fetch('http://localhost:3000/tweets/deleteTweet', config);
+        const data = await response.json();
+
+        return data
     }
 
 
@@ -74,24 +83,19 @@ function Home() {
         }
 
         const response = await fetch('http://localhost:3000/tweets/getTweet', config);
+
         const data = await response.json();
 
         return data.tweet
     }
 
-    const getUserId = async (username) => {
-        const response = await fetch(`http://localhost:3000/users/${username}/userId`);
-        const data = await response.json();
 
-        return data.user._id
-    }
 
     const getIsLikedByUser = async (username, message) => {
-        const userId = await getUserId(username);
         const tweet = await getTweet(username, message);
         const tweetId = tweet._id;
 
-        const response = await fetch(`http://localhost:3000/tweets/${tweetId}/isLikedBy/${userId}`);
+        const response = await fetch(`http://localhost:3000/tweets/${tweetId}/isLikedBy/${username}`);
         const data = await response.json();
 
         return data.result;
@@ -105,30 +109,25 @@ function Home() {
         const tweet = await getTweet(username, message);
         const tweetId = tweet._id;
 
-        console.log(isLikedByUser)
-
         if (isLikedByUser) {
-            const response = await fetch(`/${tweetId}/likedBy/${username}`);
+            const response = await fetch(`http://localhost:3000/tweets/${tweetId}/unlikedBy/${username}`);
+            console.log(response)
+
             const data = await response.json();
+
             return data
         } else {
-            const response = await fetch(`/${tweetId}/unlikedBy/${username}`);
+            const response = await fetch(`http://localhost:3000/tweets/${tweetId}/likedBy/${username}`);
             const data = await response.json();
+
             return data
         }
-
     }
 
 
     const tweetElements = tweets.map((e, i) => {
         return <Tweet key={i} {...e} currentDate deleteTweet={deleteTweet} updateLiked={updateLiked} />
     })
-
-    console.log(firstname)
-
-    console.log(tweetElements)
-
-
 
     return (
         <div className={styles.homeBody}>

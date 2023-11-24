@@ -55,11 +55,5 @@ router.get('/connected/:username', (req, res) => {
     })
 });
 
-router.get('/:username/userId', (req, res) => {
-    const username = req.params.username;
-    User.findOne({ username }).then(user => {
-        user.username ? res.json({ result: true, userId: user._id }) : res.json({ result: false, error: "User not found" })
-    })
-})
 
 module.exports = router;

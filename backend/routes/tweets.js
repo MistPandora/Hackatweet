@@ -49,7 +49,6 @@ router.get('/:tweetId/likedBy/:username', (req, res) => {
         Tweet.updateOne({ _id: tweetId }, { $push: { isLikedBy: userId } }).then(() => {
             res.json({ result: true, message: "Tweet updated" })
         })
-
     })
 
 })
@@ -63,19 +62,31 @@ router.get('/:tweetId/unlikedBy/:username', (req, res) => {
         const userId = user._id;
 
         Tweet.updateOne({ _id: tweetId }, { $pull: { isLikedBy: userId } }).then(() => {
+
             res.json({ result: true, message: "Tweet removed" })
         })
-
     })
 
 })
 
-router.get('/:tweetId/isLikedBy/:userId', (req, res) => {
+router.get('/:tweetId/isLikedBy/:username', (req, res) => {
     const tweetId = req.params.tweetId;
-    const userId = req.params.userId;
+    const username = req.params.username;
 
-    Tweet.findOne({ _id: tweetId, isLikedBy: { $elemMatch: userId } }).then(objecId => {
-        objecId ? res.json({ result: true }) : res.json({ result: false })
+    Tweet.findById(tweetId).populate('isLikedBy').then(tweetPopulated => {
+        const userData = tweetPopulated.isLikedBy.filter(e => e.username == username);
+        userData.length ? res.json({ result: true }) : res.json({ result: false })
+    })
+
+
+})
+
+router.post('/deleteTweet', (req, res) => {
+    const username = req.body.username;
+    const message = req.body.message;
+
+    Tweet.deleteOne({ username, message }).then(() => {
+        res.json({ result: true, message: "Tweet deleted" })
     })
 
 })
