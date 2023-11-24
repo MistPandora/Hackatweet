@@ -33,6 +33,7 @@ function Home() {
 
     }, [])
 
+<<<<<<< HEAD
     useEffect(() => {
         fetch('http://localhost:3000/tweets/')
             .then(response => response.json())
@@ -40,6 +41,15 @@ function Home() {
                 setTweets([...tweets, data.tweets])
             })
     }, [isTweetAdded])
+=======
+    // useEffect(() => {
+    //     fetch('http://localhost:3000/tweets/')
+    //         .then(response => response.json())
+    //         .then(data => {
+    //             setTweets(data.tweets)
+    //         })
+    // }, [isTweetAdded])
+>>>>>>> 31798e0817b5fd859c119e2a882cbbbf0acc4dcd
 
     const handleLogout = () => {
         dispatch(logoutUser());
@@ -58,6 +68,7 @@ function Home() {
             });
     }
 
+<<<<<<< HEAD
     const deleteTweet = () => {
         deleteTweet.remove([...tweets, data.tweets])
     }
@@ -69,6 +80,13 @@ function Home() {
     const tweetElements = tweets.map((e, i) => {
         <Tweet {...e} deleteTweet={deleteTweet} currentDate />
     })
+=======
+    // const deleteTweet = () => {
+    //     dispatch(removeTweetToStore({ firstname: firstName, username: userName, message }))
+    // }
+
+    // const tweetElements = tweets.map((e, i) => <Tweet {...e} currentDate={currentDate} />)
+>>>>>>> 31798e0817b5fd859c119e2a882cbbbf0acc4dcd
 
 
     return (
@@ -104,8 +122,13 @@ function Home() {
                 </div>
 
                 <div className={styles.tweetContainer}>
+<<<<<<< HEAD
                     {tweetElements}
 
+=======
+                    {/* {tweetElements} */}
+                    <FontAwesomeIcon icon={faPoo} className={styles.poo} onClick={() => deleteTweet()} />
+>>>>>>> 31798e0817b5fd859c119e2a882cbbbf0acc4dcd
                 </div>
 
             </div>
